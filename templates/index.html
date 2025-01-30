@@ -4,30 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Stock Market App</h1>
-    
-    <form method="POST">
-        <input type="text" name="symbol" placeholder="Enter stock symbol (e.g., AAPL)" required>
-        <button type="submit">Search</button>
-    </form>
-    
-    {% if stock_data %}
-        <div>
-            <h2>{{ stock_data.symbol }} Stock Information</h2>
-            <p>Price: ${{ stock_data.price }}</p>
-            <p>Timestamp: {{ stock_data.timestamp }}</p>
-            <form action="/add_to_portfolio" method="POST">
-                <input type="hidden" name="symbol" value="{{ stock_data.symbol }}">
-                <button type="submit">Add to Portfolio</button>
-            </form>
+    <div class="container">
+        <h1>Stock Market Data</h1>
+        <h2>Enter Stock Ticker</h2>
+        
+        <!-- Stock Symbol Form -->
+        <form method="POST">
+            <input type="text" name="ticker_symbol" placeholder="Enter Stock Symbol (e.g. RELIANCE.NS)" required>
+            <button type="submit">Fetch Data</button>
+        </form>
+        
+        {% if ticker %}
+            <h3>Displaying data for: {{ ticker }}</h3>
+        {% endif %}
+        
+        <h2>Stock Price Chart</h2>
+        <div id="stock-chart">
+            {{ graph_html|safe }}
         </div>
-    {% elif error %}
-        <p>{{ error }}</p>
-    {% endif %}
-    
-    <a href="/portfolio">Go to Portfolio</a>
+    </div>
 </body>
 </html>
