@@ -4,26 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Price Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+            text-align: left;
+        }
+
+        .error {
+            color: #ff6347;
+            font-size: 1.1em;
+        }
+
+        .stock-info p {
+            font-size: 1.1em;
+            color: #444;
+            margin: 5px 0;
+        }
+
+        .stock-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Search Stock</h1>
-    <form method="POST">
-        <label for="stock_symbol">Enter Stock Symbol:</label>
-        <input type="text" id="stock_symbol" name="stock_symbol" required>
-        <button type="submit">Search</button>
-    </form>
+    <div class="container">
+        <h1>Search Stock</h1>
+        <form method="POST">
+            <label for="stock_symbol">Enter Stock Symbol:</label>
+            <input type="text" id="stock_symbol" name="stock_symbol" placeholder="e.g. AAPL, GOOGL" required>
+            <button type="submit">Search</button>
+        </form>
 
-    {% if stock_info %}
-        <h2>Stock Information for {{ stock_info.symbol }}</h2>
-        <p>Close Price: {{ stock_info.close }}</p>
-        <p>Open Price: {{ stock_info.open }}</p>
-        <p>High Price: {{ stock_info.high }}</p>
-        <p>Low Price: {{ stock_info.low }}</p>
-        <p>Volume: {{ stock_info.volume }}</p>
-    {% endif %}
+        {% if stock_info %}
+            <div class="stock-info">
+                <h2>Stock Information for {{ stock_info.symbol }}</h2>
+                <p><strong>Close Price:</strong> ${{ stock_info.close }}</p>
+                <p><strong>Open Price:</strong> ${{ stock_info.open }}</p>
+                <p><strong>High Price:</strong> ${{ stock_info.high }}</p>
+                <p><strong>Low Price:</strong> ${{ stock_info.low }}</p>
+                <p><strong>Volume:</strong> {{ stock_info.volume }}</p>
+            </div>
+        {% endif %}
 
-    {% if error_message %}
-        <h2 style="color: red;">{{ error_message }}</h2>
-    {% endif %}
+        {% if error_message %}
+            <div class="error">{{ error_message }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
