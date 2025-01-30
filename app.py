@@ -16,6 +16,7 @@ def index():
             stock = yf.Ticker(stock_symbol)
             stock_info = stock.history(period="1d")
 
+            # Check if stock_info is empty
             if stock_info.empty:
                 error_message = f"No data available for {stock_symbol}"
         except Exception as e:

@@ -18,7 +18,7 @@
         <p style="color: red;">{{ error_message }}</p>
     {% endif %}
 
-    {% if stock_info %}
+    {% if stock_info is not none and not stock_info.empty %}
         <h2>Stock Data for {{ stock_info.index[0] }}:</h2>
         <p><strong>Close:</strong> {{ stock_info['Close'].iloc[0] }}</p>
         <p><strong>Open:</strong> {{ stock_info['Open'].iloc[0] }}</p>
