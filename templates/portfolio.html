@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+</head>
+<body>
+    <h1>Your Stock Portfolio</h1>
+    
+    <ul>
+        {% for stock in portfolio %}
+            <li>{{ stock.symbol }} - ${{ stock.price }} ({{ stock.timestamp }})</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="/">Back to Search</a>
+</body>
+</html>
