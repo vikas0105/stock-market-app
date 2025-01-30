@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Search</title>
+    <title>Stock Price Search</title>
 </head>
 <body>
     <h1>Search Stock</h1>
-
     <form method="POST">
         <label for="stock_symbol">Enter Stock Symbol:</label>
         <input type="text" id="stock_symbol" name="stock_symbol" required>
         <button type="submit">Search</button>
     </form>
 
+    {% if stock_info %}
+        <h2>Stock Information for {{ stock_info.symbol }}</h2>
+        <p>Close Price: {{ stock_info.close }}</p>
+        <p>Open Price: {{ stock_info.open }}</p>
+        <p>High Price: {{ stock_info.high }}</p>
+        <p>Low Price: {{ stock_info.low }}</p>
+        <p>Volume: {{ stock_info.volume }}</p>
+    {% endif %}
+
     {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
+        <h2 style="color: red;">{{ error_message }}</h2>
     {% endif %}
-
-    {% if stock_info is not none and not stock_info.empty %}
-        <h2>Stock Data for {{ stock_info.index[0] }}:</h2>
-        <p><strong>Close:</strong> {{ stock_info['Close'].iloc[0] }}</p>
-        <p><strong>Open:</strong> {{ stock_info['Open'].iloc[0] }}</p>
-        <p><strong>High:</strong> {{ stock_info['High'].iloc[0] }}</p>
-        <p><strong>Low:</strong> {{ stock_info['Low'].iloc[0] }}</p>
-        <p><strong>Volume:</strong> {{ stock_info['Volume'].iloc[0] }}</p>
-    {% endif %}
-
 </body>
 </html>
